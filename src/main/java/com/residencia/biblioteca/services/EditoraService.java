@@ -3,10 +3,11 @@ package com.residencia.biblioteca.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.residencia.biblioteca.entities.Editora;
 import com.residencia.biblioteca.repositories.EditoraRepository;
-
+@Service
 public class EditoraService {
 
 	// Crud

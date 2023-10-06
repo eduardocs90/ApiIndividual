@@ -9,27 +9,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity // obrigatório na criação de entidades
-@Table(name = "livro") // para identificar a qual tabela essa classe se refere la no banco de dados (é
-						// opcional)
+@Entity
+@Table(name = "livro")
 public class Livro {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // é usado pra gerar um valor automatico
-	@Column(name = "codigolivro") // essa anotação (@) se refere a qual esse atributo se refere a uma coluna no
-									// banco
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigolivro")
 	private Integer codigoLivro;
 
-	@ManyToOne // cardinalidade entre emprestimo e aluno
+	@ManyToOne
 	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoeditora")
 	private Editora editora;
 
-	@ManyToMany(mappedBy = "livro")
+	@OneToMany(mappedBy = "livro")
 	private List<Emprestimo> emprestimo;
-
 
 	@Column(name = "nomelivro")
 	private String nomeLivro;
@@ -46,10 +43,11 @@ public class Livro {
 	public Integer getCodigoLivro() {
 		return codigoLivro;
 	}
+
 	public List<Emprestimo> getEmprestimo() {
 		return emprestimo;
 	}
-	
+
 	public void setEmprestimo(List<Emprestimo> emprestimo) {
 		this.emprestimo = emprestimo;
 	}

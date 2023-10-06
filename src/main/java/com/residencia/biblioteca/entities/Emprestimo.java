@@ -11,22 +11,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity // obrigatório na criação de entidades
-@Table(name = "emprestimo") // para identificar a qual tabela essa classe se refere la no banco de dados (é
-// opcional)
+@Entity 
+@Table(name = "emprestimo") 
 public class Emprestimo {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // é usado pra gerar um valor automatico
-	@Column(name = "codigoemprestimo") // essa anotação (@) se refere a qual esse atributo se refere a uma coluna no
-										// banco
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "codigoemprestimo") 
 	private Integer codigoEmprestimo;
 
-	@ManyToOne // cardinalidade entre emprestimo e aluno
+	@ManyToOne
 	@JoinColumn(name = "numeromatriculaaluno", referencedColumnName = "numeromatriculaaluno")
 	private Aluno aluno;
 
-	@ManyToOne // cardinalidade entre emprestimo e aluno
-	@JoinColumn(name = "codigolivro", referencedColumnName = "codigolivro") // substitui o atributo codigo livro
+	@ManyToOne 
+	@JoinColumn(name = "codigolivro", referencedColumnName = "codigolivro")
 	private Livro livro;
 
 	@Column(name = "dataemprestimo")

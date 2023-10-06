@@ -10,15 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity // obrigatório na criação de entidades
-@Table(name = "editora") // para identificar a qual tabela essa classe se refere la no banco de dados (é
-							// opcional)
+@Entity 
+@Table(name = "editora") 
 public class Editora {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // é usado pra gerar um valor automatico
-	@Column(name = "codigoEditora") // essa anotação (@) se refere a qual esse atributo se refere a uma coluna no
-									// banco
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "codigoEditora") 
 	private Integer codigoEditora;
 
 	@Column(name = "nome")
@@ -33,14 +31,14 @@ public class Editora {
 	@Column(name = "imageurl")
 	private String imageUrl;
 
-	@OneToMany(mappedBy = "editora") // cardinalidade da lista
-	private List<Emprestimo> livro;
+	@OneToMany(mappedBy = "editora") 
+	private List<Livro> livro;
 
-	public List<Emprestimo> getLivro() {
+	public List<Livro> getLivro() {
 		return livro;
 	}
 
-	public void setLivro(List<Emprestimo> livro) {
+	public void setLivro(List<Livro> livro) {
 		this.livro = livro;
 	}
 

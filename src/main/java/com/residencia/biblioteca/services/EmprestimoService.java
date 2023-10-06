@@ -3,23 +3,18 @@ package com.residencia.biblioteca.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.residencia.biblioteca.entities.Emprestimo;
 import com.residencia.biblioteca.repositories.EmprestimoRepository;
-
+@Service
 public class EmprestimoService {
 
-	// Crud
-	//metodo para recuperar todos os 
-	//recuperar aluno pela chave ptrimaria
-	// salvar um novo aluno
-	//atualizar um aluno
-	//deletar um aluno
 
 		@Autowired // implenta tecnica de injeção de dependencia
 		EmprestimoRepository emprestimoRep;
 
-		public List<Emprestimo> listarEmprestimo() {
+		public List<Emprestimo> listarEmprestimos() {
 			return emprestimoRep.findAll();
 		}
 
@@ -31,7 +26,7 @@ public class EmprestimoService {
 			return emprestimoRep.save(emprestimo);
 		}
 
-		public Emprestimo atualizarEmpretimo (Emprestimo emprestimo) {
+		public Emprestimo atualizarEmprestimo (Emprestimo emprestimo) {
 			return emprestimoRep.save(emprestimo);
 		}
 

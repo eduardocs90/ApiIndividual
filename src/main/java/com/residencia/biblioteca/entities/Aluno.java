@@ -11,15 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity // obrigatório na criação de entidades
-@Table(name = "aluno") // para identificar a qual tabela essa classe se refere la no banco de dados (é
-						// opcional)
+@Entity
+@Table(name = "aluno")
 public class Aluno {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // é usado pra gerar um valor automatico
-	@Column(name = "numeromatriculaaluno") // essa anotação (@) se refere a qual esse atributo se refere a uma coluna no
-											// banco
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "numeromatriculaaluno")
 	private Integer numeroMatriculaAluno;
 
 	@Column(name = "nome")

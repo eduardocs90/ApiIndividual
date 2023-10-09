@@ -2,6 +2,8 @@ package com.residencia.biblioteca.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,21 +18,22 @@ public class Editora {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	@Column(name = "codigoEditora") 
+	@Column(name = "codigoeditora") 
 	private Integer codigoEditora;
 
 	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "imagenome")
-	private String imageNome;
+	@Column(name = "imagem_nome")
+	private String imagemNome;
 
-	@Column(name = "imagefilename")
-	private String imageFileName;
+	@Column(name = "imagem_filename")
+	private String imagemFileName;
 
-	@Column(name = "imageurl")
-	private String imageUrl;
-
+	@Column(name = "imagem_url")
+	private String imagemUrl;
+	
+	@JsonManagedReference(value = "editora-livro-ref")
 	@OneToMany(mappedBy = "editora") 
 	private List<Livro> livro;
 
@@ -59,27 +62,27 @@ public class Editora {
 	}
 
 	public String getImageNome() {
-		return imageNome;
+		return imagemNome;
 	}
 
 	public void setImageNome(String imageNome) {
-		this.imageNome = imageNome;
+		this.imagemNome = imageNome;
 	}
 
 	public String getImageFileName() {
-		return imageFileName;
+		return imagemFileName;
 	}
 
 	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
+		this.imagemFileName = imageFileName;
 	}
 
 	public String getImageUrl() {
-		return imageUrl;
+		return imagemUrl;
 	}
 
 	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+		this.imagemUrl = imageUrl;
 	}
 
 }

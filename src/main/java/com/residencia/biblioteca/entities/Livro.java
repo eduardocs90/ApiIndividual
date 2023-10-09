@@ -3,6 +3,9 @@ package com.residencia.biblioteca.entities;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +24,12 @@ public class Livro {
 	@Column(name = "codigolivro")
 	private Integer codigoLivro;
 
+	@JsonBackReference(value = "editora-livro-ref")
 	@ManyToOne
 	@JoinColumn(name = "codigoeditora", referencedColumnName = "codigoeditora")
 	private Editora editora;
 
+	@JsonManagedReference(value = "livro-emprestimo-ref")
 	@OneToMany(mappedBy = "livro")
 	private List<Emprestimo> emprestimo;
 
@@ -34,8 +39,8 @@ public class Livro {
 	@Column(name = "nomeautor")
 	private String nomeAutor;
 
-	@Column(name = "datadelancamento")
-	private Date dataDeLancamento;
+	@Column(name = "datalancamento")
+	private Date dataLancamento;
 
 	@Column(name = "codigoisbn")
 	private Integer codigoIsbn;
@@ -68,20 +73,12 @@ public class Livro {
 		this.nomeAutor = nomeAutor;
 	}
 
-	public Date getDataDeLancamento() {
-		return dataDeLancamento;
+	public Date getDataLancamento() {
+		return dataLancamento;
 	}
 
-	public void setDataDeLancamento(Date dataDeLancamento) {
-		this.dataDeLancamento = dataDeLancamento;
-	}
-
-	public Integer getDcodigoIsbn() {
-		return codigoIsbn;
-	}
-
-	public void setDcodigoIsbn(Integer dcodigoIsbn) {
-		this.codigoIsbn = dcodigoIsbn;
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	public Editora getEditora() {

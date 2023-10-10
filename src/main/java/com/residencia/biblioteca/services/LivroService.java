@@ -25,7 +25,7 @@ public class LivroService {
 		}
 
 		public Livro buscarLivroPorId(Integer id) {
-			return livroRep.findById(id).get(); // metodo que busca um objeto pelo id
+			return livroRep.findById(id).orElse(null); // metodo que busca um objeto pelo id
 		}
 
 		public Livro salvarLivro(Livro livro) {

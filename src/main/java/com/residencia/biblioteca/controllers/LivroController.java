@@ -30,7 +30,11 @@ public class LivroController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Livro> buscarLivroPorId(@PathVariable Integer id) {
-		return new ResponseEntity<> (livroService.buscarLivroPorId(id), HttpStatus.OK);
+		Livro livro = livroService.buscarLivroPorId(id);
+		if(livro==null)
+		return new ResponseEntity<> (livro, HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<> (livro,HttpStatus.OK);
 		
 	}
 	@PostMapping

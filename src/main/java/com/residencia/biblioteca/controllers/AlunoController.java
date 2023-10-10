@@ -1,4 +1,4 @@
-package com.residencia.biblioteca.controllers;
+package com.residencia.biblioteca.controllers; // Define o pacote ao qual esta classe pertence
 
 import java.util.List;
 
@@ -18,39 +18,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.residencia.biblioteca.entities.Aluno;
 import com.residencia.biblioteca.services.AlunoService;
 
-@RestController
-@RequestMapping("/alunos")
+@RestController // Marca esta classe como um controlador do Spring MVC
+@RequestMapping("/alunos") // Mapeia a rota base para todas as rotas nesta classe
 public class AlunoController {
 	
-	@Autowired
+	@Autowired // Injeta automaticamente uma instância do AlunoService
 	AlunoService alunoService; 
 	
-	@GetMapping
+	@GetMapping // Rota para a operação de listagem de alunos
 	public ResponseEntity<List<Aluno>> listarAlunos(){
 		return new ResponseEntity<> (alunoService.listarAlunos(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") // Rota para a operação de busca de aluno por ID
 	public ResponseEntity<Aluno> buscarPorId(@PathVariable Integer id) {
-		return new ResponseEntity<> (alunoService.buscarAlunoPorId(id), HttpStatus.OK);
+		Aluno aluno = alunoService.buscarAlunoPorId(id);
+		if(aluno == null)
+		
+		return new ResponseEntity<> (aluno,HttpStatus.NOT_FOUND);
+		
+		else 
+			return new ResponseEntity<> (aluno,HttpStatus.OK);
 		}
 	
-	@GetMapping("/porid")
+	@GetMapping("/porid") // Rota para a operação de busca de aluno por ID usando um parâmetro de requisição
 	public ResponseEntity<Aluno> buscarAlunoPorId(@RequestParam Integer id) {
 		return new ResponseEntity<> (alunoService.buscarAlunoPorId(id), HttpStatus.OK);
 		
 	}
-	@PostMapping
+	@PostMapping // Rota para a operação de criação de um novo aluno
 	public ResponseEntity<Aluno> salvar(@RequestBody Aluno aluno) {
 		return new ResponseEntity<> (alunoService.salvarAluno(aluno), HttpStatus.CREATED);
 	}
 	
-	@PutMapping
+	@PutMapping // Rota para a operação de atualização de um aluno existente
 	public ResponseEntity<Aluno> atualizar(@RequestBody Aluno aluno) {
 		return new ResponseEntity<> (alunoService.atualizarAluno(aluno), HttpStatus.OK);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping // Rota para a operação de exclusão de um aluno
 	public ResponseEntity<String> deletarAluno(@RequestBody Aluno aluno) {
 		alunoService.deletarAluno(aluno);
 		return new ResponseEntity<> ("Deletado com Sucesso", HttpStatus.OK);

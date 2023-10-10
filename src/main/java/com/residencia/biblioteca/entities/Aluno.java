@@ -3,7 +3,8 @@ package com.residencia.biblioteca.entities;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,42 +14,44 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "aluno")
+@JsonIdentityInfo( // Configuração para serialização JSON
+    generator = ObjectIdGenerators.PropertyGenerator.class, // Usa um gerador de identidade baseado em propriedade
+    property = "numeroMatriculaAluno" // Propriedade usada como identificador
+)
+@Entity // Define que essa classe é uma entidade JPA (representa uma tabela no banco de dados)
+@Table(name = "aluno") // Especifica o nome da tabela no banco de dados
 public class Aluno {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "numeromatriculaaluno")
-	private Integer numeroMatriculaAluno;
+    @Id // Define que o campo abaixo é a chave primária
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define a estratégia (Serial) de geração de valores para a chave primária (neste caso, auto-incremento)
+    @Column(name = "numeromatriculaaluno") // Especifica o nome da coluna no banco de dados
+    private Integer numeroMatriculaAluno; // Declaração de um campo para armazenar o número de matrícula do aluno
 
-	@Column(name = "nome")
-	private String nome;
+    @Column(name = "nome") // Especifica o nome da coluna no banco de dados
+    private String nome; // Declaração de um campo para armazenar o nome do aluno
 
-	@Column(name = "datanascimento")
-	private Date dataNascimento;
+    @Column(name = "datanascimento") 
+    private Date dataNascimento; 
+    @Column(name = "cpf") 
+    private String cpf; 
 
-	@Column(name = "cpf")
-	private String cpf;
+    @Column(name = "logradouro")
+    private String logradouro; 
 
-	@Column(name = "logradouro")
-	private String logradouro;
+    @Column(name = "numerologradouro") 
+    private String NumeroLogradouro; 
 
-	@Column(name = "numerologradouro")
-	private String NumeroLogradouro;
+    @Column(name = "complemento") 
+    private String complemento; 
 
-	@Column(name = "complemento")
-	private String complemento;
+    @Column(name = "bairro") 
+    private String bairro; 
 
-	@Column(name = "bairro")
-	private String bairro;
-
-	@Column(name = "cidade")
-	private String cidade;
-	
-	@JsonManagedReference(value = "aluno-mng-ref") //evita erro de recursividade infinita////evita erro de recursividade infinita (tem que estar nas duas entidades relacionadas)
-	@OneToMany(mappedBy = "aluno") // cardinalidade da lista
-	private List<Emprestimo> emprestimos;
+    @Column(name = "cidade") 
+    private String cidade; 
+    
+    @OneToMany(mappedBy = "aluno") // Define uma relação de um-para-muitos com a entidade Emprestimo, onde esta é a entidade proprietária
+    private List<Emprestimo> emprestimos; // Declaração de uma lista para armazenar os empréstimos associados a este aluno
 
 	public Integer getNumeroMatriculaAluno() {
 		return numeroMatriculaAluno;

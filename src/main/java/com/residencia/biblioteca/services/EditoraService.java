@@ -25,7 +25,7 @@ public class EditoraService {
 		}
 
 		public Editora buscarEditoraPorId(Integer id) {
-			return editoraRep.findById(id).get(); // metodo que busca um objeto pelo id
+			return editoraRep.findById(id).orElse(null); // metodo que busca um objeto pelo id
 		}
 
 		public Editora salvarEditora(Editora editora) {

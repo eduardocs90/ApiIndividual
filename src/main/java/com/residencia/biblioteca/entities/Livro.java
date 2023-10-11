@@ -36,12 +36,13 @@ public class Livro {
 	/*@JsonManagedReference(value = "livro-emprestimo-ref")*/
 	@OneToMany(mappedBy = "livro")
 	private List<Emprestimo> emprestimo;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigoautor", referencedColumnName = "codigoautor")
+	private Autor autor;
 
 	@Column(name = "nomelivro")
 	private String nomeLivro;
-
-	@Column(name = "nomeautor")
-	private String nomeAutor;
 
 	@Column(name = "datalancamento")
 	private Date dataLancamento;
@@ -69,12 +70,12 @@ public class Livro {
 		this.nomeLivro = nomeLivro;
 	}
 
-	public String getNomeAutor() {
-		return nomeAutor;
+	public Autor getAutor() {
+		return autor;
 	}
 
-	public void setNomeAutor(String nomeAutor) {
-		this.nomeAutor = nomeAutor;
+	public void setAutor(Autor autor) {
+		this.autor = autor;
 	}
 
 	public Date getDataLancamento() {

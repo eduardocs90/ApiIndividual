@@ -56,11 +56,15 @@ public class AlunoController {
 		return new ResponseEntity<> (alunoService.atualizarAluno(aluno), HttpStatus.OK);
 	}
 	
-	@DeleteMapping // Rota para a operação de exclusão de um aluno
-	public ResponseEntity<String> deletarAluno(@RequestBody Aluno aluno) {
-		alunoService.deletarAluno(aluno);
-		return new ResponseEntity<> ("Deletado com Sucesso", HttpStatus.OK);
-		
+	@DeleteMapping
+	public ResponseEntity<String> deletarLivro(@RequestBody Aluno aluno) {
+		if(alunoService.deletarAluno(aluno))
+			return new 
+					ResponseEntity<>("{\"msg\":\"Deletado com Sucesso\"}", 
+							HttpStatus.OK);
+		else 
+			return new 
+					ResponseEntity<>("{\"msg\":\"Não foi possível deletar\"}", 
+							HttpStatus.BAD_REQUEST);		
 	}
-
 }

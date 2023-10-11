@@ -36,9 +36,24 @@ public class EditoraService {
 			return editoraRep.save(editora);
 		}
 
-		public void deletarEditora(Editora editora) {
+		public Boolean deletarEditora(Editora editora) {
+			if(editora == null)
+				return false;
+			
+			Editora editoraExistente = buscarEditoraPorId(editora.getCodigoEditora());
+			
+			if(editoraExistente == null)
+				return false;
+			
 			editoraRep.delete(editora);
+			
+			Editora editoraContinuaExistindo = 
+					buscarEditoraPorId(editora.getCodigoEditora());
+			
+			if(editoraContinuaExistindo == null)
+				return true;
 
+			return false;	
 		}
 
 
